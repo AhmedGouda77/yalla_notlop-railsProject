@@ -15,10 +15,10 @@
     <%= f.label :image %><br>
     <%= f.text_field :image %>
   </div>
-  <div class="field">
-    <%= f.label :for %><br>
-    <%= f.text_field :for %>
-  </div>
+   <div class="field">
+  <%= f.label :for %> 
+  <%= f.select(:for, options_for_select([['breakfast'], ['dinner']]), {}) %>
+</div>
   <div class="field">
     <%= f.label :from %><br>
     <%= f.text_field :from %>
