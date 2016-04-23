@@ -1,5 +1,9 @@
-1) make sure you run 'bundle install'
+1) to uplaod image first if you ubuntu run sudo apt-get install imagemagick 
+	centos yum install ImageMagick
+2) update database.yml by changing database username and password to your's
+
+3) make sure you run 'bundle install'
 	to download all required gems 
 
-2) run 'rake db:migrate' to create all databse table 
+4) run 'rake db:migrate' to create all databse table 
 
