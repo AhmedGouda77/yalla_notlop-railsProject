@@ -58,8 +58,8 @@
       <ul class="nav navbar-nav">
     	<% if user_signed_in? %>
 						<li><%= link_to "Frinds",'' %></li>
-						<li><%=link_to "Groups", orders_path%></li>
-						<li><%=link_to "Orders", groups_path%></li>
+						<li><%=link_to "Groups",groups_path%></li>
+						<li><%=link_to "Orders", orders_path%></li>
 
 					<% end -%>
        
