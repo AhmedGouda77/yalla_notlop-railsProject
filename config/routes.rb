@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :order_details
   resources :orders
   resources :groups
-  devise_for :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
     # get '/sign_in', to: 'users#sign_in'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'orders#index'
     # match 'sessions#create'
-    get 'signin', to: 'sessions#new', as: 'signin'
+  get 'signin', to: 'sessions#new', as: 'signin'
 
   # Example of regular route:
     # get 'products/:id' => 'catalog#view'
