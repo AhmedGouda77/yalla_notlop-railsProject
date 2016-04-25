@@ -27,9 +27,21 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(order_params)
+    @order.user_id = current_user.id
+    @order.status = 0
+    users_arr = "[" + params[:users] + "]"
+    users_ids = eval(users_arr)
 
+    group_users_arr = "[" + params[:group_users] + "]"
+    group_users_ids = eval(group_users_arr)
+
+    users_ids.push(*group_users_ids)
+    # abort()
     respond_to do |format|
       if @order.save
+        users_ids.uniq.each do |id|
+          orders_user = OrdersUser.new( :order_id => @order.id , :user_id => id , :is_joined => false ).save
+        end
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
       else
@@ -71,6 +83,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:image, :for, :from)
+      params.require(:order).permit(:avatar, :for, :from)
     end
 end
