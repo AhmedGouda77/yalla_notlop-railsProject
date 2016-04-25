@@ -4,7 +4,15 @@
 
   <title>YallaNotlob</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'jquery.multiselect' %>
+  <%= stylesheet_link_tag    'jquery.multiselect.filter' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <style type="text/css">
+  	.multSelktrImg span{position: relative;top: 10px;vertical-align: middle;
+    display: inline-flex;}
+	.multSelktrImg input {vertical-align: -2px;}
+	.multSelktrImg img {position: relative;height: 60px;margin: 2px 6px;top: -10px;}
+  </style>
   <%= csrf_meta_tags %>
 </head>
 <body>

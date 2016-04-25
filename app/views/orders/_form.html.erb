@@ -12,18 +12,87 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :image %><br>
-    <%= f.text_field :image %>
+    <%= f.label :for %>:<br/> 
+    <%= f.select(:for, options_for_select([['breakfast'], ['launch']]), {}) %>
   </div>
-   <div class="field">
-  <%= f.label :for %> 
-  <%= f.select(:for, options_for_select([['breakfast'], ['dinner']]), {}) %>
-</div>
+
   <div class="field">
-    <%= f.label :from %><br>
+    <%= f.label :from %>:<br/>
     <%= f.text_field :from %>
   </div>
+
+
+  <div style="position: fixed; top:180px;right:200px" class="field">
+    <b>Invite Groups:</b><br>
+    <select class="invite" style="width:370px; max-height:1000px;" id="group_users">
+    <% Group.where(user_id: current_user.id).each do |group| %>
+    <optgroup label="<%= group.name %>">
+    <% group.followers_by_type('User').each do |user| %>
+      
+    <option value="<%= user.id %>" image="<%= user.avatar.url %>" class="multSelktrImg"><%= user.name %></option>
+  <% end %>
+  </optgroup>
+  <% end %>
+  </select>
+  <br>
+  <br/><b>Invite Friends:</b><br>
+    <select class="invite" style="width:370px; height: 500px;" id="users">
+    <% current_user.followers_by_type('User').each do |user| %>
+      
+    <option value="<%= user.id %>" image="<%= user.avatar.url %>" class="multSelktrImg"><%= user.name %></option>
+  <% end %>
+  </select>
+  </div>
+
+  <div class="field">
+    <b>Menu:</b><br>
+    <img id="myImg" src="#" alt=" "/>
+    <%= f.file_field :avatar %>
+  </div>
+   <br/>
+   <br/>
+   <br/>
+
+   <input type="hidden" name="group_users" />
+   <input type="hidden" name="users" />
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: "btn btn-success" %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+$("#users").multiselect({close: function() {
+            debugger;
+            var values = new Array();
+            $(this).multiselect("getChecked").each(function(index, item) {
+
+                values.push($(item).val());
+            });
+            $("input[name=users]").val(values.join(","));
+    }}).multiselectfilter();
+
+$("#group_users").multiselect({close: function() {
+            debugger;
+            var values = new Array();
+            $(this).multiselect("getChecked").each(function(index, item) {
+
+                values.push($(item).val());
+            });
+            $("input[name=group_users]").val(values.join(","));
+    }}).multiselectfilter();
+
+$(function () {
+        $(":file").change(function () {
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+                reader.onload = imageIsLoaded;
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+    });
+
+    function imageIsLoaded(e) {
+        $('#myImg').attr('src', e.target.result);
+    }
+    ;
+</script>
