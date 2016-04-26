@@ -25,8 +25,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise', '3.4.1'
 gem 'paperclip', '~> 4.1'
 gem "acts_as_follower"
-gem 'bootstrap-sass', '~> 3.3.4.1'
 gem 'jquery-ui-rails'
+
+gem 'twitter-bootstrap-rails' 
+gem 'devise-bootstrap-views' 
 
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'

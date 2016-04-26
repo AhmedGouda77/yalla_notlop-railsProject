@@ -31,6 +31,39 @@ def self.new_with_session(params, session)
     end
   end
 
+  def except_current_user(users)
+
+    users.reject {|user| user.id == self.id }
+
+    
+
+  end
+
+
+  def self.search(param)
+    return User.none if param.blank?
+
+    param.strip!
+    param.downcase!
+
+    (name_match(param) + email_match(param)).uniq
+    
+  end
+
+  def self.name_match(param)
+    where("name like ?", "%#{param}%")
+    
+  end
+
+  def self.email_match(param)
+
+        where(" email like ?", "%#{param}%")
+
+    
+  end
+
+
+
 
 
 end
