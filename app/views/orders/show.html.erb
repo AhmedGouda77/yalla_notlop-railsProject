@@ -1,6 +1,44 @@
 <p id="notice"><%= notice %></p>
 
 
+
+
+<% orderID = params[:id] %>
+<div class="container">
+  <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">
+<% allusers= OrdersUser.where(order_id: orderID).where(is_joined: 1)  %>
+<%= OrdersUser.where(order_id: orderID).where(is_joined: 1).count %>       
+ Joined: </button>
+  <div id="demo" class="collapse">
+    <% allusers.each do |user| %>
+<% users= User.where(id: user.user_id) %>        
+             <% users.each do |user| %>
+	 <%= user.name %>
+<% end %> 
+<% end %> 
+  </div>
+</div>
+     
+        
+
+<div class="container">
+  <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo2">
+<% allusers= OrdersUser.where(order_id: orderID)  %>   
+<%= OrdersUser.where(order_id: orderID).count %>  
+invited:   </button>
+<div id="demo2" class="collapse">
+             <% allusers.each do |user| %>
+<% users= User.where(id: user.user_id) %>        
+             <% users.each do |user| %>
+	 <%= user.name %>
+<% end %> 
+<% end %>
+ </div>
+
+
+
+
+
 <h2>Order Details</h2>
 <table class="table table-striped">
   <thead>

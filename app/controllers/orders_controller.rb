@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
   def index
 
    #     @orders = Order.user_id.where(is_joined: 1 ).page(params[:page]).per(5)
-    @orders = Order.all.where(user_id: current_user.id ).page(params[:page]).per(5)
+    @orders = Order.all.where(user_id: current_user.id )
    #  @orders = Order.all.page(params[:page]).per(5)
   end
 
