@@ -30,6 +30,7 @@ gem 'jquery-ui-rails'
 
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
+gem 'kaminari'
 
 
 # Use ActiveModel has_secure_password

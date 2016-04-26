@@ -1,19 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Menu:</strong>
-  <%= image_tag @order.avatar.url %>
-</p>
 
-<p>
-  <strong>For:</strong>
-  <%= @order.for %>
-</p>
+<h2>Order Details</h2>
 
-<p>
-  <strong>From:</strong>
-  <%= @order.from %>
-</p>
 
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>
