@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
   def index
 
    #     @orders = Order.user_id.where(is_joined: 1 ).page(params[:page]).per(5)
-    @orders = Order.all.where(user_id: current_user.id)
+    @orders = Order.all.where(user_id: current_user.id ).page(params[:page]).per(5)
    #  @orders = Order.all.page(params[:page]).per(5)
   end
 
@@ -33,8 +33,8 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    @order = Order.new(order_params)
-
+   # @order = Order.new(order_params)
+  @order = current_user.orders.build(order_params)
     respond_to do |format|
       if @order.save
         format.html { redirect_to @order, notice: 'Order was successfully created.' }

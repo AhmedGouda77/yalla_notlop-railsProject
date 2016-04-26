@@ -25,19 +25,37 @@ class OrderDetailsController < ApplicationController
 
   # POST /order_details
   # POST /order_details.json
-  def create
-    @order_detail = OrderDetail.new(order_detail_params)
+#  def create
 
-    respond_to do |format|
-      if @order_detail.save
-        format.html { redirect_to @order_detail, notice: 'Order detail was successfully created.' }
-        format.json { render :show, status: :created, location: @order_detail }
-      else
-        format.html { render :new }
-        format.json { render json: @order_detail.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+#	@order = Order.find(params[:order_id])
+#	@order_detail= @order.order_details.create(order_detail_params)
+#	redirect_to order_path(@order)	
+#end
+#	private 
+#		def order_detail_params
+#			params.require(:order_detail).permit(:item,:amount,:price,:comment)
+#		end	
+
+def create
+	@order = Order.find(params[:order_id])
+	@orderdetail= @order.order_details.create(orderdetail_params)
+	redirect_to order_path(@order)	
+end
+		
+
+#  def create
+ #   @order_detail = OrderDetail.new(order_detail_params)
+
+  #  respond_to do |format|
+  #    if @order_detail.save
+  #      format.html { redirect_to @order_detail, notice: 'Order detail was successfully created.' }
+  #      format.json { render :show, status: :created, location: @order_detail }
+  #    else
+  #      format.html { render :new }
+  #      format.json { render json: @order_detail.errors, status: :unprocessable_entity }
+  #    end
+  #  end
+  #end
 
   # PATCH/PUT /order_details/1
   # PATCH/PUT /order_details/1.json
@@ -71,6 +89,11 @@ class OrderDetailsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_detail_params
-      params.require(:order_detail).permit(:item, :price, :amount, :comment)
+      params.require(:order_detail).permit(:item, :price, :amount, :comment, :user_id, :order_id, :created_at, :updated_at)
     end
+
+ 
+		def orderdetail_params
+			params.require(:order_detail).permit(:item,:amount,:price,:comment)
+		end
 end
