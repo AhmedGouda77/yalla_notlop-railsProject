@@ -5,6 +5,7 @@
  *= require_self
  *= require devise_bootstrap_views
  *= require jquery-ui
+ *= require font-awesome
  *= require_tree .
 */
 

@@ -1,5 +1,8 @@
 class Order < ActiveRecord::Base
 	include PublicActivity::Common
+	validates :for, :presence => true
+	validates :from, :presence => true
+	validates :avatar, :presence => true
 	has_many :order_details
 	  has_and_belongs_to_many :users , dependent: :destroy
 	    enum for: [ :breakfast, :launch ]

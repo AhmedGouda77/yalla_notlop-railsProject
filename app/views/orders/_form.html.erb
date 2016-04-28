@@ -37,7 +37,7 @@
   <br>
   <br/><b>Invite Friends:</b><br>
     <select class="invite" style="width:370px; height: 500px;" id="users">
-    <% current_user.followers_by_type('User').each do |user| %>
+    <% current_user.following_by_type('User').each do |user| %>
       
     <option value="<%= user.id %>" image="<%= user.avatar.url %>" class="multSelktrImg"><%= user.name %></option>
   <% end %>

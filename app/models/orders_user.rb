@@ -1,7 +1,7 @@
 class OrdersUser < ActiveRecord::Base
   belongs_to :user
   belongs_to :order
-
+  validates :user_id, :presence => true
   
         def self.joinedOrders(currentUserID)
         a = OrdersUser.all.where(user_id: currentUserID).where(is_joined: 1)

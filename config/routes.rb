@@ -7,9 +7,14 @@ Rails.application.routes.draw do
 
 
 resources :orders do 
-
-	resources :order_details
+  resources :order_details
  end
+
+resources :notifications do 
+  collection do
+    :mark_as_read
+  end
+end
 
  
   get 'searchfriend', to: 'friend#search_friend'
