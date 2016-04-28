@@ -7,9 +7,14 @@ Rails.application.routes.draw do
 
 
 resources :orders do 
-
-	resources :order_details
+  resources :order_details
  end
+
+resources :notifications do 
+  collection do
+    :mark_as_read
+  end
+end
 
  
   get 'searchfriend', to: 'friend#search_friend'
@@ -35,7 +40,7 @@ resources :orders do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'orders#index'
+  root 'orders#home'
     # match 'sessions#create'
   get 'signin', to: 'sessions#new', as: 'signin'
 

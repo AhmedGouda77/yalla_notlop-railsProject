@@ -1,13 +1,29 @@
 class OrdersController < ApplicationController
+<<<<<<< HEAD
+=======
+	  before_action :authenticate_user!, only: [:index, :new, :show, :edit, :update, :destroy, :home]
+
+>>>>>>> 5ac1b6a50386b070e056d9f7a424b252a1efc194
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   # GET /orders
   # GET /orders.json
   def index
-
    #     @orders = Order.user_id.where(is_joined: 1 ).page(params[:page]).per(5)
-    @orders = Order.all.where(user_id: current_user.id )
-   #  @orders = Order.all.page(params[:page]).per(5)
+ 
+   # @orders = Order.all.where(user_id: current_user.id  )
+    @orders = Order.currentUserOrders(current_user.id)
+    @orderJoined = OrdersUser.joinedOrders(current_user.id)
+
+    @ordersJoined = []
+    @orderJoined.each do |order|
+    torder = Order.getOrderDetails(order.order_id)
+    tcount = OrdersUser.countJoined(order.order_id)
+    #@ordersJoined += torder if torder
+     @ordersJoined += torder if torder
+    # @ordersJoined += tcount
+    end 
+
   end
 
   # GET /orders/1
@@ -25,7 +41,9 @@ class OrdersController < ApplicationController
   end
 
   def home
-     @l_orders = Order.last(3)
+    @myfriendsids=current_user.following_users.map { |e| e.id }
+     @orders = Order.where(user_id: current_user.id).last(5)
+     @activities = PublicActivity::Activity.where(owner_id: @myfriendsids)
   end
 
   # POST /orders
@@ -48,8 +66,10 @@ class OrdersController < ApplicationController
     # abort()
     respond_to do |format|
       if @order.save
+	      @order.create_activity :create, owner: current_user
         users_ids.uniq.each do |id|
           orders_user = OrdersUser.new( :order_id => @order.id , :user_id => id , :is_joined => false ).save
+          #Notification.create(recipient: User.find(id), actor: current_user, action: "invited", notifiable: @order)
         end
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
@@ -65,7 +85,7 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update("status" => "finished")
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
+         format.html { redirect_to :back }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit }
@@ -92,6 +112,10 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
+<<<<<<< HEAD
       params.require(:order).permit(:image, :for, :from,:avatar)
+=======
+      params.require(:order).permit(:image, :for, :from, :avatar)
+>>>>>>> 5ac1b6a50386b070e056d9f7a424b252a1efc194
     end
 end

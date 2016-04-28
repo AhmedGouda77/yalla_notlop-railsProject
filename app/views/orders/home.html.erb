@@ -1,0 +1,21 @@
+<h3> Latest Orders </h3>
+<table>
+  <tbody>
+    
+    <% @orders.each do |order| %>
+        <tr> <td><%= order.for %> on <%= order.created_at %> </td></tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<h1>
+	Friends Activities
+
+</h1>
+
+	<% @activities.each do |act| %>
+		<%= render_activity act %>
+	<% end %>
+
+
