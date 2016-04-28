@@ -52,7 +52,6 @@ class OrdersController < ApplicationController
     respond_to do |format|
       if @order.save
 	      @order.create_activity :create, owner: current_user
-        order_owner = OrdersUser.new( :order_id => @order.id , :user_id => current_user.id , :is_joined => true ).save
         users_ids.uniq.each do |id|
           orders_user = OrdersUser.new( :order_id => @order.id , :user_id => id , :is_joined => false ).save
           #Notification.create(recipient: User.find(id), actor: current_user, action: "invited", notifiable: @order)
