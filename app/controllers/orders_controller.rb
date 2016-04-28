@@ -6,10 +6,20 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-
    #     @orders = Order.user_id.where(is_joined: 1 ).page(params[:page]).per(5)
-    @orders = Order.all.where(user_id: current_user.id )
-   #  @orders = Order.all.page(params[:page]).per(5)
+ 
+   # @orders = Order.all.where(user_id: current_user.id  )
+    @orders = Order.currentUserOrders(current_user.id)
+    @orderJoined = OrdersUser.joinedOrders(current_user.id)
+
+    @ordersJoined = []
+    @orderJoined.each do |order|
+    torder = Order.getOrderDetails(order.order_id)
+    tcount = OrdersUser.countJoined(order.order_id)
+    #@ordersJoined += torder if torder
+     @ordersJoined += torder if torder
+    # @ordersJoined += tcount
+
   end
 
   # GET /orders/1
