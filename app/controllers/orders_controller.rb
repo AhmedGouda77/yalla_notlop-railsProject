@@ -27,7 +27,8 @@ class OrdersController < ApplicationController
   end
 
   def home
-     @l_orders = Order.last(3)
+     @orders = Order.where(user_id: current_user.id).last(5)
+     @activities = PublicActivity::Activity.all
   end
 
   # POST /orders
@@ -50,6 +51,7 @@ class OrdersController < ApplicationController
     # abort()
     respond_to do |format|
       if @order.save
+	@order.create_activity :create, owner: current_user
         users_ids.uniq.each do |id|
           orders_user = OrdersUser.new( :order_id => @order.id , :user_id => id , :is_joined => false ).save
         end
@@ -67,7 +69,7 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update("status" => "finished")
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
+         format.html { redirect_to :back }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit }

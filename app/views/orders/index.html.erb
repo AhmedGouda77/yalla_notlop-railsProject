@@ -3,8 +3,7 @@
 <br>
 <h2>Orders</h2>
 
-<%  if %>
-<table border="1">
+<table class="table table-striped">
   <thead>
     <tr>
 
@@ -37,16 +36,27 @@
       </tr>
 
 <% end %>
+   <% orderJoined =OrdersUser.all.where(user_id: current_user.id).where(is_joined: 1) %>
+    <% orderJoined.each do |orders| %>
+  
+    <% ordersJoined = Order.all.where(id: orders.order_id  ) %>
+    <% ordersJoined.each do |orderj| %>
+      <tr>
+        <td><%= orderj.for %></td>
+        <td><%= orderj.from %></td>
+        <td> <%= OrdersUser.where(order_id: orderj.id).count %></td>
+        <td><%= OrdersUser.where(order_id: orderj.id).where(is_joined: 1).count %></td>
+
+        <td><%= orderj.status %></td>
+        <td><%= link_to 'View', orderj %></td>
+      </tr>
 <% end %>
+     <% end %>
 
   </tbody>
 </table>
 
 <br>
-
-
-
-
 
 <br>
 

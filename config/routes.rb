@@ -31,7 +31,7 @@ resources :orders do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'orders#index'
+  root 'orders#home'
     # match 'sessions#create'
   get 'signin', to: 'sessions#new', as: 'signin'
 
