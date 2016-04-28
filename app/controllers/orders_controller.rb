@@ -19,6 +19,7 @@ class OrdersController < ApplicationController
     #@ordersJoined += torder if torder
      @ordersJoined += torder if torder
     # @ordersJoined += tcount
+    end 
 
   end
 
