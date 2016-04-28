@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   acts_as_follower
   acts_as_followable
   
+  validates :name, uniqueness: true
+
 
   has_many :groups , dependent: :destroy
   has_and_belongs_to_many :orders , dependent: :destroy
@@ -37,6 +39,10 @@ def self.new_with_session(params, session)
 
     
 
+  end
+
+  def self.searchByName(name)
+      where("name = ?", "#{name}")
   end
 
 

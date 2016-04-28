@@ -1,0 +1,48 @@
+<h2><%= @groupName%></h2>
+<%= render '/groups/add_friend_to_group' %>
+<% if @members %>
+<div class="col-lg-12">
+<% @members.each do |user| %>
+	
+		<div class="col-md-6" > 
+			<div class="col-md-8">
+				<%= link_to  image_tag(user.avatar.url(:thumb))%>
+			</div>
+			<div class="col-md-4">
+				<div class="col-md-12" ><%= user.name %></div>
+				<div class="col-md-12">
+					<% unless current_user.following?(user)%> 
+						<!-- function -->
+
+						<%= link_to "Add as my friend", addfriend_path(user: current_user, friend: user),
+
+						class: 'btn btn-xs btn-success', method: :post %>
+
+						<% else %>
+
+						<span class='label label-primary'>
+
+						<%= link_to 'Unfriend',unfriend_path(id: user.id),:method => :delete,	:data => { :confirm => 'Are you sure?' }%>
+
+						</span>
+
+						<% end %>
+
+
+				
+					
+				</div>
+
+			</div> 
+		</div>			
+			
+	
+	
+    <% end %>
+    </div>
+    <%else %>
+    	<div>
+      	 <span>No friends in this group yet</span>
+      </div>
+
+    <% end -%>

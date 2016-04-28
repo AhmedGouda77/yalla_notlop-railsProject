@@ -1,6 +1,4 @@
 class OrdersController < ApplicationController
-	  before_action :authenticate_user!, only: [:index, :new, :show, :edit, :update, :destroy]
-
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   # GET /orders
@@ -94,6 +92,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:image, :for, :from)
+      params.require(:order).permit(:image, :for, :from,:avatar)
     end
 end

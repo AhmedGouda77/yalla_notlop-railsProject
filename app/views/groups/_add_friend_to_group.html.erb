@@ -1,0 +1,26 @@
+
+	<%= form_tag addFriendsToGroup_path, remote: true, method: :post do %>
+
+	<div class="form-group row no-padding text-center col-md-12">
+
+			<div class="col-sm-10">
+
+				<%= text_field_tag :username, params[:username], placeholder: 'Enter Friend Name ',
+
+				class: 'form-control search-box input-lg' %>
+				<%= hidden_field_tag :groupid , @group.id %>
+
+			</div>
+
+			<div class="col-sm-2">
+
+				<%= button_tag(type: :submit, class: 'btn btn-sm btn-success search') do %>
+
+				 add Friend
+				<% end %>
+
+			</div>
+
+	</div>
+
+	<% end %>

@@ -2,7 +2,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
   def change
     create_table(:users) do |t|
       ## Database authenticatable
-      t.string :name, null: false, :unique => true
+      t.string :name, null: false
       t.string :imag 
 
       t.string :email,              null: false, default: ""
@@ -43,3 +43,4 @@ class DeviseCreateUsers < ActiveRecord::Migration
     # add_index :users, :unlock_token,         unique: true
   end
 end
+
