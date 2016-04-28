@@ -5,9 +5,12 @@ class OrderDetailsController < ApplicationController
 
   # GET /order_details
   # GET /order_details.json
-  def index
+   def index
     @order_details = OrderDetail.all
+    @orderJoined = OrdersUser.countJoined(params[:order_id])
+    @orderInvited = Order
   end
+
 
   # GET /order_details/1
   # GET /order_details/1.json
@@ -76,7 +79,7 @@ end
   def destroy
     @order_detail.destroy
     respond_to do |format|
-      format.html { redirect_to order_details_url, notice: 'Order detail was successfully destroyed.' }
+      format.html { redirect_to :back }
       format.json { head :no_content }
     end
   end

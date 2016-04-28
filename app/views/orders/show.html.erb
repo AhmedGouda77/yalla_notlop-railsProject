@@ -1,3 +1,4 @@
+<p id="notice"><%= notice %></p>
 
 <% orderID = params[:id] %>
 <div class="container">
@@ -9,12 +10,11 @@
     <% allusers.each do |user| %>
 <% users= User.where(id: user.user_id) %>        
              <% users.each do |user| %>
-	 <%= user.name %>
+   <%= user.name %>
 <% end %> 
 <% end %> 
   </div>
-</div>
-     
+</div>  
         
 
 <div class="container">
@@ -26,13 +26,10 @@ invited:   </button>
              <% allusers.each do |user| %>
 <% users= User.where(id: user.user_id) %>        
              <% users.each do |user| %>
-	 <%= user.name %>
+   <%= user.name %>
 <% end %> 
 <% end %>
  </div>
-
-
-
 
 
 <h2>Order Details</h2>
@@ -45,6 +42,7 @@ invited:   </button>
       <th>Amount</th>
       <th>Price</th>
       <th>Comment</th>
+      <th>Cancel</th>
 
 
     </tr>
@@ -59,14 +57,15 @@ invited:   </button>
              <% users.each do |user| %>
 
 
-	  <%= user.name %>  
+    <%= user.name %>  
 <% end %></td>
 
-	 <td> <%= order_detail.item %>  </td>
-	 <td> <%= order_detail.amount %>  </td>
-	 <td> <%= order_detail.price %>	  </td>
-	 <td> <%= order_detail.comment %> </td>
-
+   <td> <%= order_detail.item %>  </td>
+   <td> <%= order_detail.amount %>  </td>
+   <td> <%= order_detail.price %>   </td>
+   <td> <%= order_detail.comment %> </td>
+         <td><% if current_user.id == order_detail.user_id %> 
+           <%=  link_to 'Cancel', order_detail, method: :delete, data: { confirm: 'Are you sure to cancel this order ?'  } %> <% end %></td>
  </tr>
 
 <% end %>
@@ -82,6 +81,9 @@ invited:   </button>
 <div class="field" style="display:inline;">
     <%= f.label :item %>
     <%= f.text_field :item %>
+  </div>
+<div class="field" style="display:inline;">
+    <%= f.hidden_field :user_id, value:current_user.id  %>
   </div>
   <div class="field" style="display:inline;">
     <%= f.label :price %>
@@ -100,4 +102,3 @@ invited:   </button>
   </div>
 
 <% end %>
-
