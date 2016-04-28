@@ -36,11 +36,7 @@
       </tr>
 
 <% end %>
-   <% orderJoined =OrdersUser.all.where(user_id: current_user.id).where(is_joined: 1) %>
-    <% orderJoined.each do |orders| %>
-  
-    <% ordersJoined = Order.all.where(id: orders.order_id  ) %>
-    <% ordersJoined.each do |orderj| %>
+    <% @ordersJoined.each do |orderj| %>
       <tr>
         <td><%= orderj.for %></td>
         <td><%= orderj.from %></td>
@@ -51,7 +47,6 @@
         <td><%= link_to 'View', orderj %></td>
       </tr>
 <% end %>
-     <% end %>
 
   </tbody>
 </table>
