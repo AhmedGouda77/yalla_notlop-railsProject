@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-	  before_action :authenticate_user!, only: [:index, :new, :show, :edit, :update, :destroy]
+	  before_action :authenticate_user!, only: [:index, :new, :show, :edit, :update, :destroy, :home]
 
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
@@ -51,9 +51,11 @@ class OrdersController < ApplicationController
     # abort()
     respond_to do |format|
       if @order.save
-	@order.create_activity :create, owner: current_user
+	      @order.create_activity :create, owner: current_user
+        order_owner = OrdersUser.new( :order_id => @order.id , :user_id => current_user.id , :is_joined => true ).save
         users_ids.uniq.each do |id|
           orders_user = OrdersUser.new( :order_id => @order.id , :user_id => id , :is_joined => false ).save
+          #Notification.create(recipient: User.find(id), actor: current_user, action: "invited", notifiable: @order)
         end
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
