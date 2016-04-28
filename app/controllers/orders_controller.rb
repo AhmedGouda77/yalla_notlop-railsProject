@@ -38,8 +38,9 @@ class OrdersController < ApplicationController
   end
 
   def home
+    @myfriendsids=current_user.following_users.map { |e| e.id }
      @orders = Order.where(user_id: current_user.id).last(5)
-     @activities = PublicActivity::Activity.all
+     @activities = PublicActivity::Activity.where(owner_id: @myfriendsids)
   end
 
   # POST /orders
