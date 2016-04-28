@@ -1,19 +1,14 @@
 class OrderDetailsController < ApplicationController
-	  before_action :authenticate_user!, only: [:index, :new, :show, :edit, :update, :destroy]
+    before_action :authenticate_user!, only: [:index, :new, :show, :edit, :update, :destroy]
 
   before_action :set_order_detail, only: [:show, :edit, :update, :destroy]
 
-  # GET /order_details
-  # GET /order_details.json
-   def index
+  def index
     @order_details = OrderDetail.all
     @orderJoined = OrdersUser.countJoined(params[:order_id])
     @orderInvited = Order
   end
 
-
-  # GET /order_details/1
-  # GET /order_details/1.json
   def show
   end
 
@@ -26,42 +21,13 @@ class OrderDetailsController < ApplicationController
   def edit
   end
 
-  # POST /order_details
-  # POST /order_details.json
-#  def create
-
-#	@order = Order.find(params[:order_id])
-#	@order_detail= @order.order_details.create(order_detail_params)
-#	redirect_to order_path(@order)	
-#end
-#	private 
-#		def order_detail_params
-#			params.require(:order_detail).permit(:item,:amount,:price,:comment)
-#		end	
 
 def create
-	@order = Order.find(params[:order_id])
-	@orderdetail= @order.order_details.create(orderdetail_params)
-	redirect_to order_path(@order)	
+  @order = Order.find(params[:order_id])
+  @orderdetail= @order.order_details.create(orderdetail_params)
+  redirect_to order_path(@order)  
 end
-		
 
-#  def create
- #   @order_detail = OrderDetail.new(order_detail_params)
-
-  #  respond_to do |format|
-  #    if @order_detail.save
-  #      format.html { redirect_to @order_detail, notice: 'Order detail was successfully created.' }
-  #      format.json { render :show, status: :created, location: @order_detail }
-  #    else
-  #      format.html { render :new }
-  #      format.json { render json: @order_detail.errors, status: :unprocessable_entity }
-  #    end
-  #  end
-  #end
-
-  # PATCH/PUT /order_details/1
-  # PATCH/PUT /order_details/1.json
   def update
     respond_to do |format|
       if @order_detail.update(order_detail_params)
@@ -96,7 +62,8 @@ end
     end
 
  
-		def orderdetail_params
-			params.require(:order_detail).permit(:item,:amount,:price,:comment)
-		end
+    def orderdetail_params
+                        #if params.reguire(:order_detail)
+      params.require(:order_detail).permit(:item,:amount,:price,:comment, :user_id)
+    end
 end
