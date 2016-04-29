@@ -2,9 +2,10 @@
   <div class="box box-warning" style="padding:30px;">
 <%= render 'form' %>
 
+<div class="col-lg-4">
 <p id="notice"><%= notice %></p>
 
-<h3>Listing Groups</h3>
+<h1>Listing Groups</h1>
 
 <table class="table table-striped">
   <thead>
@@ -18,7 +19,7 @@
     <% @groups.each do |group| %>
       <tr>
         <td><%= group.name %></td>
-       <td><span><%= link_to  image_tag('add.jpg' , size: "30x30"), group_members_path(:id => group.id), :remote =>true  %></span>
+      <td><span><%= link_to  image_tag('add.jpg' , size: "30x30"), group_members_path(:id => group.id), :remote =>true  %></span>
         
         <span><%= link_to image_tag('x.png' , size: "20x20"), group, method: :delete, data: { confirm: 'Are you sure?' } %></span></td>
       </tr>
@@ -27,7 +28,7 @@
 </table>
 
 <br>
-
+</div>
 <div class="col-lg-3"></div>
 <div class="col-lg-5" >
 <div id="groupfriends">

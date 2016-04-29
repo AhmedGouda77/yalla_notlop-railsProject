@@ -1,21 +1,78 @@
-<h3> Latest Orders </h3>
-<table>
-  <tbody>
-    
-    <% @orders.each do |order| %>
-        <tr> <td><%= order.for %> on <%= order.created_at %> </td></tr>
-    <% end %>
-  </tbody>
-</table>
+	        <div class="col-md-8">
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Latest Orders</h3>
 
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive">
 
-<h1>
-	Friends Activities
+                <table class="table no-margin">
+                  <thead>
+                  
+                  <tr>
+                    <th>Restaurant</th>
+                    <th>Ordered by</th>
+                    <th>For</th>
+                    <th>Date</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  	<% @orders.each do |order| %>
+                  <tr>
+                    <td><a href="pages/examples/invoice.html"> <%= order.from %></a></td>
+                    <td><% users= User.where(id: order.user_id) %>        
+                    <% users.each do |user| %>
+                    <%= user.name %>
+                    <% end %> </td>
+                    <td><span class="label label-success"> <%= order.for %></span></td>
+                    <td>
+                      <div class="sparkbar" data-color="#00a65a" data-height="20"><%= order.created_at %></div>
+                    </td>
+                  </tr>
+                  <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
 
-</h1>
+        <div class="col-md-4">
+              <div class="box box-danger">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Friends Activities</h3>
 
-	<% @activities.each do |act| %>
-		<%= render_activity act %>
-	<% end %>
+                  <div class="box-tools pull-right">
+                    <span class="label label-danger">your friends</span>
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body no-padding">
+
+                  <ul class="users-list clearfix">
+                  	<% @activities.each do |act| %>
+                    <li>
+                      <img src="assets/avatar5.png" alt="User Image">
+                      <a class="users-list-name" href="#">Alexander Pierce</a>
+                      <span class="users-list-date">Today</span>
+	                 </li>
+	                  <%= render_activity act %>
+	                <% end %>
+                  </ul>
+                </div>
+              </div>
+        </div>
+     
 
 
