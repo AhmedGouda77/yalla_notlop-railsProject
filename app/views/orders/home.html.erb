@@ -26,7 +26,7 @@
                   <tbody>
                   	<% @orders.each do |order| %>
                   <tr>
-                    <td><a href="pages/examples/invoice.html"> <%= order.from %></a></td>
+                    <td><a> <%= order.from %></a></td>
                     <td><% users= User.where(id: order.user_id) %>        
                     <% users.each do |user| %>
                     <%= user.name %>
@@ -60,16 +60,18 @@
                 <!-- /.box-header -->
                 <div class="box-body no-padding">
 
-                  <ul class="users-list clearfix">
+                  <table class="users-list clearfix table no-margin">
                   	<% @activities.each do |act| %>
-                    <li>
-                      <img src="assets/avatar5.png" alt="User Image">
-                      <a class="users-list-name" href="#">Alexander Pierce</a>
-                      <span class="users-list-date">Today</span>
-	                 </li>
-	                  <%= render_activity act %>
+                    <tr>
+                      <td>
+                      <img src="assets/avatar5.png" alt="User Image" width="35" height="35">
+                    </td><td>
+                      <%= render_activity act %>
+	                    </td>
+                   </tr>
+	                  
 	                <% end %>
-                  </ul>
+                  </table>
                 </div>
               </div>
         </div>
