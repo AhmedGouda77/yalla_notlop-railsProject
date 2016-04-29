@@ -11,10 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20160428082753) do
-=======
-ActiveRecord::Schema.define(version: 20160427211329) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -32,7 +29,6 @@ ActiveRecord::Schema.define(version: 20160427211329) do
   add_index "activities", ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type", using: :btree
   add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
   add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
->>>>>>> 5ac1b6a50386b070e056d9f7a424b252a1efc194
 
   create_table "follows", force: :cascade do |t|
     t.integer  "followable_id",   limit: 4,                   null: false
@@ -55,6 +51,15 @@ ActiveRecord::Schema.define(version: 20160427211329) do
   end
 
   add_index "groups", ["user_id"], name: "index_groups_on_user_id", using: :btree
+
+  create_table "notification", force: :cascade do |t|
+    t.integer  "user_id",      limit: 4
+    t.string   "notification", limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "notification", ["user_id"], name: "index_notification_on_user_id", using: :btree
 
   create_table "notifications", force: :cascade do |t|
     t.integer  "recipient_id",    limit: 4
@@ -140,6 +145,7 @@ ActiveRecord::Schema.define(version: 20160427211329) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "groups", "users"
+  add_foreign_key "notification", "users"
   add_foreign_key "order_details", "orders"
   add_foreign_key "order_details", "users"
   add_foreign_key "orders", "users"

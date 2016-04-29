@@ -4,13 +4,10 @@ class User < ActiveRecord::Base
   acts_as_follower
   acts_as_followable
   
-<<<<<<< HEAD
   validates :name, uniqueness: true
 
 
-=======
   has_many :notifications, foreign_key: :recipient_id
->>>>>>> 5ac1b6a50386b070e056d9f7a424b252a1efc194
   has_many :groups , dependent: :destroy
   has_and_belongs_to_many :orders , dependent: :destroy
   devise :database_authenticatable, :registerable,

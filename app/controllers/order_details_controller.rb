@@ -1,9 +1,4 @@
 class OrderDetailsController < ApplicationController
-<<<<<<< HEAD
-=======
-    before_action :authenticate_user!, only: [:index, :new, :show, :edit, :update, :destroy]
->>>>>>> 5ac1b6a50386b070e056d9f7a424b252a1efc194
-
   before_action :set_order_detail, only: [:show, :edit, :update, :destroy]
 
   def index

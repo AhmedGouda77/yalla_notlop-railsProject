@@ -1,9 +1,4 @@
 class OrdersController < ApplicationController
-<<<<<<< HEAD
-=======
-	  before_action :authenticate_user!, only: [:index, :new, :show, :edit, :update, :destroy, :home]
-
->>>>>>> 5ac1b6a50386b070e056d9f7a424b252a1efc194
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   # GET /orders
@@ -69,7 +64,7 @@ class OrdersController < ApplicationController
 	      @order.create_activity :create, owner: current_user
         users_ids.uniq.each do |id|
           orders_user = OrdersUser.new( :order_id => @order.id , :user_id => id , :is_joined => false ).save
-          #Notification.create(recipient: User.find(id), actor: current_user, action: "invited", notifiable: @order)
+          Notification.create(recipient: User.find(id), actor: current_user, action: "invited", notifiable: @order)
         end
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
@@ -112,10 +107,7 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-<<<<<<< HEAD
       params.require(:order).permit(:image, :for, :from,:avatar)
-=======
-      params.require(:order).permit(:image, :for, :from, :avatar)
->>>>>>> 5ac1b6a50386b070e056d9f7a424b252a1efc194
+
     end
 end

@@ -63,9 +63,6 @@
       </ul>
           <ul class="nav navbar-nav navbar-right">
              <% if user_signed_in? %>
-<<<<<<< HEAD
-            <li><img class="img-circle" width="50" height="50" src="<%= current_user.avatar.url(:thumb)%>" /></li>
-=======
              <li class="nav-item btn-group" data-behavior='notifications'>
                <a class="dropdown-toggle nav link" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <h3 style=" display: inline;"><%= fa_icon "bell" %></h3>
@@ -77,8 +74,7 @@
                  <a class="dropdown-item" href="#">Something elese here</a> -->
                </div>
              </li>
-            <li class="round-image-50"><%= image_tag(current_user.avatar.url(:thumb)) %></li>
->>>>>>> 5ac1b6a50386b070e056d9f7a424b252a1efc194
+             <li><img class="img-circle" width="50" height="50" src="<%= current_user.avatar.url(:thumb)%>" /></li>
             <li><%= link_to current_user.name,'' %></li>
             <li><%=link_to "Log out", destroy_user_session_path,method: :delete%></li>
 
