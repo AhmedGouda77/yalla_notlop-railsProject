@@ -1,14 +1,13 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
-  # GET /orders
-  # GET /orders.json
   def index
    #     @orders = Order.user_id.where(is_joined: 1 ).page(params[:page]).per(5)
  
    # @orders = Order.all.where(user_id: current_user.id  )
     @orders = Order.currentUserOrders(current_user.id).page(params[:page]).per(5)
     @orderJoined = OrdersUser.joinedOrders(current_user.id)
+    @orderStatus = Order.where(id: params[:id])
 
     @ordersJoined = []
     @orderJoined.each do |order|
@@ -21,8 +20,6 @@ class OrdersController < ApplicationController
 
   end
 
-  # GET /orders/1
-  # GET /orders/1.json
   def show
   end
 
