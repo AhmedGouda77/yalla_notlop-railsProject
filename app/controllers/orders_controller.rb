@@ -7,8 +7,8 @@ class OrdersController < ApplicationController
    #     @orders = Order.user_id.where(is_joined: 1 ).page(params[:page]).per(5)
  
    # @orders = Order.all.where(user_id: current_user.id  )
-    @orders = Order.currentUserOrders(current_user.id).page(params[:page]).per(5)
-    @orderJoined = OrdersUser.joinedOrders(current_user.id)
+    @orders = Order.currentUserOrders(current_user.id).order("created_at desc").page(params[:page]).per(3)
+    @orderJoined = OrdersUser.joinedOrders(current_user.id).order("created_at desc").page(params[:page]).per(3)
 
     @ordersJoined = []
     @orderJoined.each do |order|
