@@ -1,57 +1,71 @@
 <p id="notice"><%= notice %></p>
-<%= link_to 'New Order', new_order_path %>
-<br>
-<h2>Orders</h2>
+          <div class="col-md-12">
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">My Orders</h3>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive">
 
-      <th>Order</th>
-      <th>Resturants</th>
-      <th>Invited</th>
-      <th>Joined</th>
-      <th>Status</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
+                <table class="table no-margin">
+                  <thead>
+                  
+                  <tr>
+                    <th>Order</th>
+                    <th>Restaurant</th>
+                          <th>Invited</th>
+                          <th>Joined</th>
+                          <th>Status</th>
+                          <th>Actions</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <% @orders.each do |order| %>  
+                  <tr>
+                    <td> <%= order.for %></td>
+                    <td><%= order.from %></td>
+                    <td> <%= OrdersUser.where(order_id: order.id).count %></td>
+                    <td><%= OrdersUser.where(order_id: order.id).where(is_joined: 1).count %></td>
+                    <td><%= order.status %></td>
+                    <td><%= link_to 'View', order %>
+                    <%= if order.status == "waiting"
+                link_to 'Finsih', order , method: :put 
+                   end  %> 
+                   <%= if order.status == "waiting" 
+                link_to 'Cancel', order, method: :delete, data: { confirm: 'Are you sure to cancel this order ?'  }
+                  end %> </td> 
+                  </tr>
+                  <% end %>
 
-  <tbody>
-    <% @orders.each do |order| %>            
-      <tr>
-        <td><%= order.for %></td>
-        <td><%= order.from %></td>
-        <td> <%= OrdersUser.where(order_id: order.id).count %></td>
-        <td><%= OrdersUser.where(order_id: order.id).where(is_joined: 1).count %></td>
+                  <% @ordersJoined.each do |orderj| %>
+                  <tr>
+                    <td><%= orderj.for %></td>
+                    <td><%= orderj.from %></td>
+                    <td> <%= OrdersUser.where(order_id: orderj.id).count %></td>
+                    <td><%= OrdersUser.where(order_id: orderj.id).where(is_joined: 1).count %></td>
 
-        <td><%= order.status %></td>
-        <td><%= link_to 'View', order %>
+                    <td><%= orderj.status %></td>
+                    <td><%= link_to 'View', orderj %></td>
+                  </tr>
+                  <% end %>
+                  </tbody>
+                </table>
+                <div class="box-footer clearfix">
+                  <%= link_to 'Place New Order', new_order_path,class:"btn btn-sm btn-info btn-flat pull-right" %>
+            </div>
+            
+            
+              </div>
+            </div>
+          </div>
+        </div>
+     
 
-        <%= if order.status == "waiting"
-		link_to 'Finsih', order , method: :put 
-	     end  %> 
-       <%= if order.status == "waiting" 
-		link_to 'Cancel', order, method: :delete, data: { confirm: 'Are you sure to cancel this order ?'  }
-	    end %> </td>
-      </tr>
-
-<% end %>
-    <% @ordersJoined.each do |orderj| %>
-      <tr>
-        <td><%= orderj.for %></td>
-        <td><%= orderj.from %></td>
-        <td> <%= OrdersUser.where(order_id: orderj.id).count %></td>
-        <td><%= OrdersUser.where(order_id: orderj.id).where(is_joined: 1).count %></td>
-
-        <td><%= orderj.status %></td>
-        <td><%= link_to 'View', orderj %></td>
-      </tr>
-<% end %>
-
-  </tbody>
-</table>
-
-<br>
-<%= paginate @orders %>
-<br>
 
