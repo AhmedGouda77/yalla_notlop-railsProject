@@ -69,6 +69,11 @@ class GroupsController < ApplicationController
   # DELETE /groups/1
   # DELETE /groups/1.json
   def destroy
+   users= @group.followers
+
+   users.each { |user|
+    user.stop_following(@group)
+      }
     @group.destroy
     respond_to do |format|
       format.html { redirect_to mygroups_url, notice: 'Group was successfully destroyed.' }
@@ -132,7 +137,7 @@ class GroupsController < ApplicationController
             # redirect_to group_members_path
         else
           # puts "xxxxxxxxxxxxxxxxx"
-          redirect_to group_members_path(:id => id),:flash => { :error => "Insufficient rights!" }
+          redirect_to group_members_path(:id => id)
         end
     else  
       # puts "mmmmmmmmmmmmmmmmmmmm"
