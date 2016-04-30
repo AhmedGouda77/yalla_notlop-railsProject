@@ -64,7 +64,8 @@
                   	<% @activities.each do |act| %>
                     <tr>
                       <td>
-                      <img src="assets/avatar5.png" alt="User Image" width="35" height="35">
+                      <%= image_tag(User.find(act.owner_id).avatar.url(:thumb) ,:size =>"35x35")%>
+                      <!-- <img src="assets/avatar5.png" alt="User Image" width="35" height="35"> -->
                     </td><td>
                       <%= render_activity act %>
 	                    </td>
