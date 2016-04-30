@@ -9,9 +9,6 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag "application", :media => "all" %>
-  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
    <%= favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144' %>
     <%= favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114' %>
@@ -31,34 +28,7 @@
     max-width: 85%;
     margin-top:15px;
 }
-.skin-blue .main-header .navbar {
-    background-color: #ffd777;
-    border-bottom: 2px solid #c9aa5f;
-}
-.skin-blue .main-header .logo{
-    background-color: #ffd777;
-    border-bottom: 1px solid #c9aa5f;
-    font-weight:bold;
-    text-decoration: none;
-}
-.skin-blue .main-header .logo:hover{
-    background-color: #c9aa5f;
-    border-bottom: 1px solid #c9aa5f;
-    font-weight:bold;
-    text-decoration: none;
 
-}
-.wrapper .sidebar-menu > li.active > a {
-    
-    border-left-color: #ffd777;
-}
-.wrapper .sidebar-menu > li. > a  {
-    border-left-color: #ffd777;
-}
-
-.wrapper .skin-blue .main-header li.user-header {
-    background-color: silver;
-}
   </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -116,12 +86,6 @@
 
     </nav>
   </header>
-
-
-
-
-
-
   <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
@@ -171,8 +135,6 @@
         <!-- ./col -->
 
         <!-- ./col -->
-      
-
                   <% end -%>
       </div>
 
@@ -199,21 +161,5 @@
   </footer>
   <div class="control-sidebar-bg"></div>
 </div>
-
-<script src="{{assetPath 'jQuery/jQuery-2.2.0.min.js'}}"></script>
-<!-- Bootstrap 3.3.6 -->
-<script src="{{assetPath 'fastclick.js'}}"></script>
-<!-- AdminLTE App -->
-<script src="{{assetPath 'app.min.js'}}"></script>
-<!-- Sparkline -->
-<script src="{{assetPath 'jquery.sparkline.min.js'}}"></script>
-<!-- jvectormap -->
-<script src="{{assetPath 'jquery-jvectormap-1.2.2.min.js'}}"></script>
-<script src="{{assetPath 'jquery-jvectormap-world-mill-en.js'}}"></script>
-<!-- SlimScroll 1.3.0 -->
-<script src="{{assetPath 'jquery.slimscroll.min.js'}}"></script>
-<script src="{{assetPath 'dashboard2.js'}}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{{assetPath 'demo.js'}}"></script>
 </body>
 </html>
