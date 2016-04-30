@@ -3,7 +3,6 @@
           <div class="box box-info">
             <div class="box-header with-border">
               <h3 class="box-title">My Orders</h3>
-
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
@@ -13,10 +12,8 @@
             <!-- /.box-header -->
             <div class="box-body">
               <div class="table-responsive">
-
                 <table class="table no-margin">
-                  <thead>
-                  
+                  <thead>                  
                   <tr>
                     <th>Order</th>
                     <th>Restaurant</th>
@@ -58,14 +55,10 @@
                   </tbody>
                 </table>
                 <div class="box-footer clearfix">
+                 <div class="pull-left"> <%= paginate @orders%></div>
                   <%= link_to 'Place New Order', new_order_path,class:"btn btn-sm btn-info btn-flat pull-right" %>
-            </div>
-            
-            
+            </div>           
               </div>
             </div>
           </div>
         </div>
-     
-<%= paginate @orders%>
-
