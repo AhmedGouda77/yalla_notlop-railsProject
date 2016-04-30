@@ -2,14 +2,18 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index, :new, :show, :edit, :update, :destroy, :home]
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
-  # GET /orders
-  # GET /orders.json
   def index
    #     @orders = Order.user_id.where(is_joined: 1 ).page(params[:page]).per(5)
  
    # @orders = Order.all.where(user_id: current_user.id  )
+<<<<<<< HEAD
     @orders = Order.currentUserOrders(current_user.id).page(params[:page]).per(5)
     @orderJoined = OrdersUser.joinedOrders(current_user.id)
+    @orderStatus = Order.where(id: params[:id])
+=======
+    @orders = Order.currentUserOrders(current_user.id).order("created_at desc").page(params[:page]).per(3)
+    @orderJoined = OrdersUser.joinedOrders(current_user.id).order("created_at desc").page(params[:page]).per(3)
+>>>>>>> 851f02ca2fd0c20b463856373e06d82271788e5d
 
     @ordersJoined = []
     @orderJoined.each do |order|
@@ -22,8 +26,6 @@ class OrdersController < ApplicationController
 
   end
 
-  # GET /orders/1
-  # GET /orders/1.json
   def show
   end
 

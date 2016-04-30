@@ -5,6 +5,8 @@ class OrderDetailsController < ApplicationController
     @order_details = OrderDetail.all
     @orderJoined = OrdersUser.countJoined(params[:order_id])
     @orderInvited = Order
+    @order= Order.where(id: params[:order_id])
+    
   end
 
   def show
