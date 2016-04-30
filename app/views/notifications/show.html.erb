@@ -18,16 +18,27 @@
                   <tr>
                   <td>
                   <% if nots.action == "has joined" %>
-                  
+                    <%= image_tag(nots.actor.avatar.url(:thumb), :class => "img-circle", height: '32', width: '32') %>
                     <%= nots.actor.name %>
                     <%= nots.action %> an 
                     <a href="<%= order_path(nots.notifiable, anchor: dom_id(nots.notifiable)) %>">
                     <%= nots.notifiable.class.to_s.underscore.humanize.downcase %>
                     </a>
                     <% else  %>
+                    <% if nots.remove == false %>
+                    <%= image_tag(nots.actor.avatar.url(:thumb), :class => "img-circle", height: '32', width: '32') %>
                     <%= nots.actor.name %>
                     <%= nots.action %> you to an 
                     <%= nots.notifiable.class.to_s.underscore.humanize.downcase %>
+                    <a class='btn btn-success join_btn' id='<%= nots.actor.id %>' order_id='<%= nots.notifiable.id %>' nid='<%= nots.id %>' >join</a>
+                    <% else  %>
+                    <%= image_tag(nots.actor.avatar.url(:thumb), :class => "img-circle", height: '32', width: '32') %>
+                    <%= nots.actor.name %>
+                    <%= nots.action %> you to an 
+                    <a href="<%= order_path(nots.notifiable, anchor: dom_id(nots.notifiable)) %>">
+                    <%= nots.notifiable.class.to_s.underscore.humanize.downcase %>
+                    </a>
+                    <% end  %>
                     <% end  %>
                      </td>
                   </tr>

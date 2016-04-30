@@ -17,7 +17,7 @@ resources :notifications do
   end
 end
 
- 
+ get "viewAllNotifications", to: "notifications#show"
   get 'searchfriend', to: 'friend#search_friend'
   post 'addfriend', to: 'friend#addFriend'
   delete 'unfriend', to: 'friend#unFriend'
