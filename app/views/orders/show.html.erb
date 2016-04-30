@@ -37,8 +37,8 @@
                        <td> <%= order_detail.amount %>  </td>
                        <td> <%= order_detail.price %>   </td>
                        <td> <%= order_detail.comment %> </td>
-                             <td><% if current_user.id == order_detail.user_id %> 
-                               <%=  link_to 'Cancel', order_detail, method: :delete, data: { confirm: 'Are you sure to cancel this order ?'  } %> <% end %></td>                                 
+                             <td><% if current_user.id == order_detail.user_id %> <span class="label label-success">
+                               <%=  link_to 'Cancel', order_detail, method: :delete, data: { confirm: 'Are you sure to cancel this order ?'  } %> <% end %></span></td>                                 
                   </tr>
       <% end %>
                   </tbody>

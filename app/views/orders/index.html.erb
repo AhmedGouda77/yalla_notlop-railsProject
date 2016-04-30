@@ -30,7 +30,7 @@
                     <td><%= order.from %></td>
                     <td><%= OrdersUser.where(order_id: order.id).count %></td>
                     <td><%= OrdersUser.where(order_id: order.id).where(is_joined: 1).count %></td>
-                    <td><%= order.status %></td>
+                    <td><span class="label label-success"><%= order.status %></span></td>
                     <td><%= link_to 'View', order %>
                     <%= if order.status == "waiting"
                 link_to 'Finsih', order , method: :put 
