@@ -29,7 +29,7 @@
     <optgroup label="<%= group.name %>">
     <% group.followers_by_type('User').each do |user| %>
       
-    <option value="<%= user.id %>" image="<%= user.avatar.url %>" class="multSelktrImg"><%= user.name %></option>
+    <option value="<%= user.id %>" image="<%=  user.avatar.url(:thumb) %>" class="multSelktrImg"><%= user.name %></option>
   <% end %>
   </optgroup>
   <% end %>
@@ -39,7 +39,7 @@
     <select class="invite" style="width:370px; height: 500px;" id="users">
     <% current_user.following_by_type('User').each do |user| %>
       
-    <option value="<%= user.id %>" image="<%= user.avatar.url %>" class="multSelktrImg"><%= user.name %></option>
+    <option value="<%= user.id %>" image="<%=  user.avatar.url(:thumb) %>" class="multSelktrImg"><%= user.name %></option>
   <% end %>
   </select>
   </div>

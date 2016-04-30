@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+          <div class="col-md-12">
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Notifications</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive">
+
+                <table class="table no-margin">
+                  <thead>
+                    
+                  </thead>
+                  <tbody>
+
+                    <% @notifications.each do |nots| %>  
+                  <tr>
+                  <td>
+                  <% if nots.action == "has joined" %>
+                  
+                    <%= nots.actor.name %>
+                    <%= nots.action %> an 
+                    <a href="<%= order_path(nots.notifiable, anchor: dom_id(nots.notifiable)) %>">
+                    <%= nots.notifiable.class.to_s.underscore.humanize.downcase %>
+                    </a>
+                    <% else  %>
+                    <%= nots.actor.name %>
+                    <%= nots.action %> you to an 
+                    <%= nots.notifiable.class.to_s.underscore.humanize.downcase %>
+                    <% end  %>
+                     </td>
+                  </tr>
+                  <% end %>
+                  </tbody>
+                </table>
+            
+              </div>
+            </div>
+          </div>
+        </div>

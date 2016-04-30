@@ -12,7 +12,8 @@ resources :orders do
 
 resources :notifications do 
   collection do
-    :mark_as_read
+    post :mark_as_read
+    post :make_join
   end
 end
 

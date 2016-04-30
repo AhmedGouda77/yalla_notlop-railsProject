@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :new, :show, :edit, :update, :destroy, :home]
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   # GET /orders
@@ -44,10 +45,6 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-   # @order = Order.new(order_params)
-  # @order = current_user.orders.build(order_params)
-  #   respond_to do |format|
-  #     if @order.save
   @order = Order.new(order_params)
     @order.user_id = current_user.id
     @order.status = 0
@@ -58,13 +55,13 @@ class OrdersController < ApplicationController
     group_users_ids = eval(group_users_arr)
 
     users_ids.push(*group_users_ids)
-    # abort()
+
     respond_to do |format|
       if @order.save
 	      @order.create_activity :create, owner: current_user
         users_ids.uniq.each do |id|
           orders_user = OrdersUser.new( :order_id => @order.id , :user_id => id , :is_joined => false ).save
-          Notification.create(recipient: User.find(id), actor: current_user, action: "invited", notifiable: @order)
+          Notification.create(recipient: User.find(id), actor: current_user, action: "invited", notifiable: @order, remove: false)
         end
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
