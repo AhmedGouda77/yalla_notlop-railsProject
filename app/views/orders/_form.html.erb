@@ -1,3 +1,4 @@
+
 <%= form_for(@order) do |f| %>
   <% if @order.errors.any? %>
     <div id="error_explanation">
@@ -10,7 +11,7 @@
       </ul>
     </div>
   <% end %>
-
+<div class="col-md-6">
   <div class="field">
     <%= f.label :for %>:<br/> 
     <%= f.select(:for, options_for_select([['breakfast'], ['launch']]), {}) %>
@@ -22,7 +23,23 @@
   </div>
 
 
-  <div style="position: fixed; top:180px;right:200px" class="field">
+
+  <div class="field">
+    <b>Menu:</b><br>
+    <%= f.file_field :avatar %>
+  </div>
+   <br/>
+   <br/>
+   <br/>
+
+   <input type="hidden" name="group_users" />
+   <input type="hidden" name="users" />
+  <div class="actions">
+    <%= f.submit class: "btn btn-success" %>
+  </div>
+</div>
+<div class="col-md-6">
+  <!-- <div style="position: fixed; top:180px;right:200px" class="field"> -->
     <b>Invite Groups:</b><br>
     <select class="invite" style="width:370px; max-height:1000px;" id="group_users">
     <% Group.where(user_id: current_user.id).each do |group| %>
@@ -42,27 +59,12 @@
     <option value="<%= user.id %>" image="<%=  user.avatar.url(:thumb) %>" class="multSelktrImg"><%= user.name %></option>
   <% end %>
   </select>
-  </div>
-
-  <div class="field">
-    <b>Menu:</b><br>
-    <img id="myImg" src="#" alt=" "/>
-    <%= f.file_field :avatar %>
-  </div>
-   <br/>
-   <br/>
-   <br/>
-
-   <input type="hidden" name="group_users" />
-   <input type="hidden" name="users" />
-  <div class="actions">
-    <%= f.submit class: "btn btn-success" %>
+  <img id="myImg" src="#" alt=" " style="width: 100%; padding: 0; margin: 0; height:270px; " />
   </div>
 <% end %>
 
 <script type="text/javascript">
 $("#users").multiselect({close: function() {
-            debugger;
             var values = new Array();
             $(this).multiselect("getChecked").each(function(index, item) {
 
@@ -72,7 +74,6 @@ $("#users").multiselect({close: function() {
     }}).multiselectfilter();
 
 $("#group_users").multiselect({close: function() {
-            debugger;
             var values = new Array();
             $(this).multiselect("getChecked").each(function(index, item) {
 
