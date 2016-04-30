@@ -6,14 +6,9 @@ class OrdersController < ApplicationController
    #     @orders = Order.user_id.where(is_joined: 1 ).page(params[:page]).per(5)
  
    # @orders = Order.all.where(user_id: current_user.id  )
-<<<<<<< HEAD
-    @orders = Order.currentUserOrders(current_user.id).page(params[:page]).per(5)
-    @orderJoined = OrdersUser.joinedOrders(current_user.id)
-    @orderStatus = Order.where(id: params[:id])
-=======
+
     @orders = Order.currentUserOrders(current_user.id).order("created_at desc").page(params[:page]).per(3)
     @orderJoined = OrdersUser.joinedOrders(current_user.id).order("created_at desc").page(params[:page]).per(3)
->>>>>>> 851f02ca2fd0c20b463856373e06d82271788e5d
 
     @ordersJoined = []
     @orderJoined.each do |order|
