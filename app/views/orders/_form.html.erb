@@ -39,6 +39,14 @@
   </div>
 </div>
 <div class="col-md-6">
+<% if @select_error != "" %>
+<span style="color:red;">
+<b>
+<%= @select_error %>
+</b>
+</span>
+<br/>
+<% end %>
   <!-- <div style="position: fixed; top:180px;right:200px" class="field"> -->
     <b>Invite Groups:</b><br>
     <select class="invite" style="width:370px; max-height:1000px;" id="group_users">

@@ -27,6 +27,7 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
+    @select_error = ""
   end
 
   # GET /orders/1/edit
@@ -42,21 +43,24 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-  @order = Order.new(order_params)
+    @order = Order.new(order_params)
     @order.user_id = current_user.id
     @order.status = 0
-    users_arr = "[" + params[:users] + "]"
-    users_ids = eval(users_arr)
+    if params[:users] != "" || params[:group_users] != ""
 
-    group_users_arr = "[" + params[:group_users] + "]"
-    group_users_ids = eval(group_users_arr)
 
-    users_ids.push(*group_users_ids)
+      users_arr = "[" + params[:users] + "]"
+      users_ids = eval(users_arr)
 
-    respond_to do |format|
-      if @order.save
-	      @order.create_activity :create, owner: current_user
-        users_ids.uniq.each do |id|
+      group_users_arr = "[" + params[:group_users] + "]"
+      group_users_ids = eval(group_users_arr)
+
+      users_ids.push(*group_users_ids)
+
+      respond_to do |format|
+        if @order.save
+         @order.create_activity :create, owner: current_user
+         users_ids.uniq.each do |id|
           orders_user = OrdersUser.new( :order_id => @order.id , :user_id => id , :is_joined => false ).save
           Notification.create(recipient: User.find(id), actor: current_user, action: "invited", notifiable: @order, remove: false)
         end
@@ -67,7 +71,15 @@ class OrdersController < ApplicationController
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
+  else
+    respond_to do |format|
+      @select_error =  " please select at leat 1 friend. "
+      format.html { render :new }
+      format.json { render json: @select_error, status: :unprocessable_entity }
+    end
+    # render template: "notifications/new"
   end
+end
 
   # PATCH/PUT /orders/1
   # PATCH/PUT /orders/1.json
